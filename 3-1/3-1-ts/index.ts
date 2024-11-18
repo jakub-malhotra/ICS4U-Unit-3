@@ -35,3 +35,6 @@ function main(): void {
 
     console.log("\nDone.");
 }
+
+
+main();
