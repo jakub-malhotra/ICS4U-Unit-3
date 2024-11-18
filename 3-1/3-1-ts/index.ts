@@ -26,7 +26,7 @@ function reverseString(stringToReverse: string): string {
  * Main function to execute the string reversal program.
  */
 function main(): void {
-    const aString = "Reverse";
+    const aString = "racecar";
 
     console.log("");
     console.log(`The original string is: ${aString}`);
