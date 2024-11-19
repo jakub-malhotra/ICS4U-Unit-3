@@ -20,15 +20,11 @@ def reverse_string(string_to_reverse)
   reverse_string(rest_of_string) + first_character
 end
 
-# Main functionality of the program.
-def main
-  a_string = 'racecar'
+# The main logic
+a_string = 'racecar'
 
-  puts "\nThe original string is: #{a_string}"
-  reversed_string = reverse_string(a_string)
-  puts "The reversed string is: #{reversed_string}"
+puts "\nThe original string is: #{a_string}"
+reversed_string = reverse_string(a_string)
+puts "The reversed string is: #{reversed_string}"
 
-  puts "\nDone."
-end
-
-main
+puts "\nDone."
