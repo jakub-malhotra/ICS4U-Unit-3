@@ -9,7 +9,9 @@
 # @param string_to_reverse [String] The string to be reversed.
 # @return [String] The reversed string.
 def reverse_string(string_to_reverse)
-  return '' if string_to_reverse == ''
+  if string_to_reverse == ''
+    return ''
+  end
 
   first_character = string_to_reverse[0]
   rest_of_string = string_to_reverse[1..]
