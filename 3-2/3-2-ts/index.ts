@@ -11,7 +11,7 @@
  * @returns {number} The output of the calculation.
  */
 function calculateFactorial(numberToFactorial: number): number {
-    if (numberToFactorial == 0) {
+    if (numberToFactorial < 0) {
         return -1;
     }
     if (numberToFactorial == 1 || 0) {
