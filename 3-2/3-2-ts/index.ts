@@ -11,6 +11,9 @@
  * @returns {number} The output of the calculation.
  */
 function calculateFactorial(numberToFactorial: number): number {
+    if (numberToFactorial<= 0) {
+        return -1;
+    } else {
     if (numberToFactorial == 1) {
         return 1;
     } else {
@@ -23,14 +26,12 @@ function calculateFactorial(numberToFactorial: number): number {
 
 // the main logic
 const userInput = prompt("Enter a positive integer:");
-// check if input can be sent to the function
-const aNumber = parseInt(userInput || "0")
-if (isNaN(aNumber) || aNumber <= 0) {
-    console.log("Invalid input: Only enter positive integers")
+
+console.log("");
+const theProduct = calculateFactorial(userInput);
+if (theProduct == -1) {
+    console.log("Invalid input")
 } else {
-    // if input is valid continue
-    console.log("");
-    const theProduct = calculateFactorial(aNumber);
-    console.log(`${aNumber}! = ${theProduct}`);
+    console.log(`${userInput}! = ${theProduct}`);
 }
 console.log("\nDone.");
