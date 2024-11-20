@@ -11,16 +11,20 @@
  * @returns {number} The output of the calculation.
  */
 function calculateFactorial(numberToFactorial: number): number {
+    // return -1 for error cases
+    if (Number.isInteger(numberToFactorial) === false)
+        return -1;
     if (numberToFactorial < 0) {
         return -1;
     }
+    // base case and 0 case
     if (numberToFactorial == 1 || numberToFactorial == 0) {
         return 1;
     }
-        const lowerNumber = numberToFactorial - 1;
 
-        // Multiply the lower number by the current number
-        return calculateFactorial(lowerNumber) * numberToFactorial;
+    const lowerNumber = numberToFactorial - 1;
+    // Multiply the lower number by the current number
+    return calculateFactorial(lowerNumber) * numberToFactorial;
     }
 
 // the main logic
