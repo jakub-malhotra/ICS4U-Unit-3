@@ -25,13 +25,15 @@ def calculate_factorial(number_to_factorial)
 end
 
 # The main logic
-userInput = gets
+puts "Enter a positive integer:"
+userInput = gets.chomp.to_i
+
 puts ""
 the_product = calculate_factorial(userInput)
 if the_product == -1
   puts "Invalid input"
 else
-  puts "#{userInput}! = #{reversed_string}"
+  puts "#{userInput}! = #{the_product}"
 end
 
 puts "\nDone."
