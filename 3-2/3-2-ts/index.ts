@@ -13,16 +13,15 @@
 function calculateFactorial(numberToFactorial: number): number {
     if (numberToFactorial<= 0) {
         return -1;
-    } else {
+    }
     if (numberToFactorial == 1) {
         return 1;
-    } else {
+    }
         const lowerNumber = numberToFactorial - 1;
 
         // Multiply the lower number by the current number
         return calculateFactorial(lowerNumber) * numberToFactorial;
     }
-}
 
 // the main logic
 const userInput = prompt("Enter a positive integer:");
