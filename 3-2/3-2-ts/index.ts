@@ -22,7 +22,11 @@ function calculateFactorial(numberToFactorial: number): number {
 }
 
 // the main logic
-const aNumber = prompt("Enter a positive integer:");
+const userInput = prompt("Enter a positive integer:");
+const aNumber = parseInt(userInput || "0")
+if (isNaN(aNumber) || aNumber <= 0)
+    console.log("Invalid input: Only enter positive integers")
+
 
 console.log("");
 const theProduct = calculateFactorial(aNumber);
