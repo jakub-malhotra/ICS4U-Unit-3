@@ -16,17 +16,16 @@ function calculateFactorial(numberToFactorial: number): number {
     } else {
         const lowerNumber = numberToFactorial - 1;
 
-        // Reverse the rest of the string and append the first character.
+        // Multiply the lower number by the current number
         return calculateFactorial(lowerNumber) * numberToFactorial;
     }
 }
 
 // the main logic
-const aNumber = 5
+const aNumber = prompt("Enter a positive integer:");
 
 console.log("");
-console.log(`${aNumber}!`);
 const theProduct = calculateFactorial(aNumber);
-console.log(` = ${theProduct}`);
+console.log(`${aNumber}! = ${theProduct}`);
 
 console.log("\nDone.");
