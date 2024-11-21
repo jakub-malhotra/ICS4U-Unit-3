@@ -42,6 +42,6 @@ if (input === null) {
     } else {
         console.log(`${userInput}! = ${theProduct}`);
     }
-    console.log("\nDone.");
 }
 
+console.log("\nDone.");
