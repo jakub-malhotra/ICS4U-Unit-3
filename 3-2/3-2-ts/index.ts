@@ -12,8 +12,9 @@
  */
 function calculateFactorial(numberToFactorial: number): number {
     // return -1 for error cases
-    if (Number.isInteger(numberToFactorial) === false)
+    if (Number.isInteger(numberToFactorial) === false) {
         return -1;
+    }
     if (numberToFactorial < 0) {
         return -1;
     }
@@ -28,13 +29,19 @@ function calculateFactorial(numberToFactorial: number): number {
     }
 
 // the main logic
-const userInput = prompt("Enter a positive integer:");
-
-console.log("");
-const theProduct = calculateFactorial(userInput);
-if (theProduct == -1) {
-    console.log("Invalid input")
+const input = prompt("Enter a positive integer: ");
+if (input === null) {
+    console.log("Invalid Input");
 } else {
-    console.log(`${userInput}! = ${theProduct}`);
+    const userInput = parseFloat(input);
+
+    console.log("");
+    const theProduct = calculateFactorial(userInput);
+    if (theProduct == -1) {
+        console.log("Invalid input");
+    } else {
+        console.log(`${userInput}! = ${theProduct}`);
+    }
+    console.log("\nDone.");
 }
-console.log("\nDone.");
+

@@ -6,8 +6,8 @@
 # @since   2024-11-20
 
 # Recursively preforms factorial calculations 
-# @param number_to_factorial [Int] The string to be reversed.
-# @return [String] The reversed string.
+# @param number_to_factorial [Integer] The number to be factorial
+# @return [Integer] The factorial output
 def calculate_factorial(number_to_factorial)
   # return -1 for error case
   if number_to_factorial < 0
