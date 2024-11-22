@@ -23,9 +23,8 @@ function calculateFactorial(numberToFactorial: number): number {
         return 1;
     }
 
-    const lowerNumber = numberToFactorial - 1;
     // Multiply the lower number by the current number
-    return calculateFactorial(lowerNumber) * numberToFactorial;
+    return calculateFactorial(numberToFactorial - 1) * numberToFactorial;
     }
 
 // the main logic
