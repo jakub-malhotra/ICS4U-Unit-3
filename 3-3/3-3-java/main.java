@@ -35,17 +35,32 @@ final class BinarySearch {
     /**
      * Function finds the index of a number, using Binary Search recursively.
      *
-     * @param userArray
-     * @param userNumber
-     * @param lowIndex
-     * @param highIndex
-     * @return binarySearch
+     * @param userArray  The array of integers to search through.
+     * @param userNumber The number to find.
+     * @param lowIndex   The starting index of the search range.
+     * @param highIndex  The ending index of the search range.
+     * @return The index of the number in the array, or -1 if not found.
      */
     static int binarySearch(final int[] userArray, final int userNumber,
             final int lowIndex, final int highIndex) {
-        // solve this function!
+        if (lowIndex > highIndex) {
+            // Base case: if the range is invalid, the number is not found.
+            return -1;
+        }
 
-        return -1;
+        // Find the middle index
+        int midIndex = lowIndex + (highIndex - lowIndex) / 2;
+
+        // Check if the middle element is the target number
+        if (userArray[midIndex] == userNumber) {
+            return midIndex;
+        } else if (userArray[midIndex] > userNumber) {
+            // Search in the left half
+            return binarySearch(userArray, userNumber, lowIndex, midIndex - 1);
+        } else {
+            // Search in the right half
+            return binarySearch(userArray, userNumber, midIndex + 1, highIndex);
+        }
     }
 
     public static void main(final String[] args) {
@@ -58,7 +73,8 @@ final class BinarySearch {
             int[] randomNumberArray = new int[ARRAY_SIZE];
 
             // Adding numbers to the array
-            for (int counter = 0; counter < randomNumberArray.length; counter++) {
+            for (int counter = 0; counter < randomNumberArray.length;
+            counter++) {
                 randomNumberArray[counter] = randNumber.nextInt(MAX) + 1;
             }
 
@@ -85,13 +101,17 @@ final class BinarySearch {
             if (searchNumber > MAX || searchNumber < MIN) {
                 throw new Exception();
             } else {
-                // Using binary search to find the user's chosen number in the array
+                // Using binary search to find the user's chosen number
                 int searchResult = binarySearch(numberArray, searchNumber,
                         0, numberArray.length - 1);
 
                 // Outputing the results of the search
                 System.out.println();
-                System.out.println("Your number is in index: " + searchResult);
+                if (searchResult == -1) {
+                    System.out.println("Number not found in the array");
+                } else {
+                    System.out.println("Your number is in index: " + searchResult);
+                }
             }
 
             // Catches and tells the user that an error occured
