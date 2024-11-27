@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
 
+// kuytddyt
 final class BinarySearch {
     private BinarySearch() {
         // Prevent instantiation
