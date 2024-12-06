@@ -1,20 +1,17 @@
 /*
 * This program prints out
-* all possible 3x3 Magic Squares
-* where the sum of rows, columns,
-* and diagonals equals 15.
+* the Magic Squares.
 *
-* @author  Jakub Malhotra
-* @version 1.0
-* @since   2024-12-03
+* @author  Nicholas B. , Mr. Coxall, Jakub Malhotra
+* @version 2.0
+* @since   2024-12-05
 */
 
 final class Main {
-
     /**
-     * Prevent instantiation of this class.
+     * Private constructor to prevent instantiation.
      *
-     * @throws IllegalStateException if instantiated
+     * @throws IllegalStateException if this class is instantiated.
      */
     private Main() {
         throw new IllegalStateException("Cannot be instantiated");
@@ -38,34 +35,64 @@ final class Main {
     public static final int SEVEN = 7;
     /** The lower right index. */
     public static final int EIGHT = 8;
-    /** The maximum number for magic square rows, columns, or diagonals. */
+    /** The maximum number for magicNumbers. */
+    public static final int NINE = 9;
+    /** The magic number for rows, columns, and diagonals. */
     public static final int MAGICNUM = 15;
 
-    /** Tracks the number of processes performed. */
+    /** Counter for the number of processes. */
     private static int numberOfProcess = 0;
-
-    /** Tracks the number of valid magic squares found. */
+    /** Counter for the number of magic squares generated. */
     private static int numberOfMagicSquares = 0;
 
     /**
-     * Validates if the given array forms a magic square.
+     * Generates all possible 3x3 magic squares recursively.
      *
-     * @param preSquare the array representing the magic square
-     * @return true if the array forms a valid magic square, false otherwise
+     * @param square        the current magic square array being built.
+     * @param currentSquare a secondary array used for backtracking.
+     * @param index         the current position being filled in the square.
+     */
+    public static void genSquare(final int[] square, final int[] currentSquare,
+            final int index) {
+        if (index == NINE) {
+            // Base case: the square is fully filled
+            if (isMagic(square)) {
+                printMagicSquare(square);
+                numberOfMagicSquares++;
+            }
+            numberOfProcess++;
+            return;
+        }
+
+        // Try all numbers from 1 to 9 that haven't been used yet
+        for (int number = 1; number <= NINE; number++) {
+            boolean numberUsed = false;
+
+            // Check if the number is already used
+            for (int position = 0; position < index; position++) {
+                if (square[position] == number) {
+                    numberUsed = true;
+                    break;
+                }
+            }
+
+            if (!numberUsed) {
+                // Assign number and recurse
+                square[index] = number;
+                genSquare(square, currentSquare, index + 1);
+                // Backtrack
+                square[index] = 0;
+            }
+        }
+    }
+
+    /**
+     * Checks if a given array represents a valid magic square.
+     *
+     * @param preSquare the array to be checked.
+     * @return true if the array forms a magic square, false otherwise.
      */
     public static boolean isMagic(final int[] preSquare) {
-        if (preSquare.length != 9) {
-            return false;
-        }
-
-        boolean[] seenNumbers = new boolean[10];
-        for (int currentValue : preSquare) {
-            if (currentValue < 1 || currentValue > 9 || seenNumbers[currentValue]) {
-                return false;
-            }
-            seenNumbers[currentValue] = true;
-        }
-
         int row1 = preSquare[ZERO] + preSquare[ONE] + preSquare[TWO];
         int row2 = preSquare[THREE] + preSquare[FOUR] + preSquare[FIVE];
         int row3 = preSquare[SIX] + preSquare[SEVEN] + preSquare[EIGHT];
@@ -81,93 +108,33 @@ final class Main {
     }
 
     /**
-     * Generates all possible magic squares recursively using an additional array.
+     * Prints a magic square in a 3x3 format.
      *
-     * @param square        the array representing the magic square
-     * @param currentSquare an auxiliary array to track used numbers
-     * @param index         the current index being processed
-     */
-    public static void genSquare(final int[] square, final int[] currentSquare,
-            final int index) {
-        if (index == 9) {
-            numberOfProcess++;
-            if (isMagic(square)) {
-                numberOfMagicSquares++;
-                printMagicSquare(square);
-            }
-            return;
-        }
-
-        for (int currentNumber = 1; currentNumber <= 9; currentNumber++) {
-            if (currentSquare[currentNumber - 1] == 0) {
-                square[index] = currentNumber;
-                currentSquare[currentNumber - 1] = 1;
-                genSquare(square, currentSquare, index + 1);
-                currentSquare[currentNumber - 1] = 0; // backtracking
-            }
-        }
-    }
-
-    /**
-     * Generates all possible magic squares recursively without an additional array.
-     *
-     * @param square the array representing the magic square
-     * @param index  the current index being processed
-     */
-    public static void genSquare2(final int[] square, final int index) {
-        if (index == 9) {
-            numberOfProcess++;
-            if (isMagic(square)) {
-                numberOfMagicSquares++;
-                printMagicSquare(square);
-            }
-            return;
-        }
-
-        for (int currentNumber = 1; currentNumber <= 9; currentNumber++) {
-            boolean isUsed = false;
-            for (int checkIndex = 0; checkIndex < index; checkIndex++) {
-                if (square[checkIndex] == currentNumber) {
-                    isUsed = true;
-                    break;
-                }
-            }
-            if (!isUsed) {
-                square[index] = currentNumber;
-                genSquare2(square, index + 1);
-                square[index] = 0; // backtracking
-            }
-        }
-    }
-
-    /**
-     * Prints a 3x3 magic square.
-     *
-     * @param outputSquare the array representing the magic square
+     * @param outputSquare the array representing the magic square.
      */
     public static void printMagicSquare(final int[] outputSquare) {
         System.out.println("\n*****");
         for (int count = 0; count < outputSquare.length; count++) {
             if (count == THREE || count == SIX) {
                 System.out.println();
+                System.out.print(outputSquare[count] + " ");
+            } else {
+                System.out.print(outputSquare[count] + " ");
             }
-            System.out.print(outputSquare[count] + " ");
         }
         System.out.println("\n*****");
     }
 
     /**
-     * The main entry point of the program.
+     * The main method where execution begins.
      *
-     * @param args command-line arguments
+     * @param args command-line arguments (not used).
      */
     public static void main(final String[] args) {
-        // main stub, get user input here
-        int[] magicSquare = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        int[] extraArray = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        int[] magicSquare = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] extraArray = {0, 0, 0, 0, 0, 0, 0, 0, 0};
         System.out.println("\n");
         System.out.println("All Possible Magic Squares (3x3):\n");
-        genSquare2(magicSquare, 0);
         genSquare(magicSquare, extraArray, 0);
 
         System.out.println("Number of processes: " + numberOfProcess);
