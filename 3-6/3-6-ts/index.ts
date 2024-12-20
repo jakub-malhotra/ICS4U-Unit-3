@@ -1,46 +1,65 @@
 /*
- * Program to calculate factorials using recursion.
+ * Program to preform merge sort using recursion.
  * @author Jakub Malhotra
  * @version 1.0
  * @since   2024-11-20
  */
 
 /**
- * Recursively preforms factorial calculations
- * @param {number} numberToFactorial - The number to be calculated in factorial.
- * @returns {number} The output of the calculation.
+ * Recursively performs Merge Sort on an array.
+ * @param {number[]} array - The array to sort.
+ * @returns {number[]} The sorted array.
  */
-function calculateFactorial(numberToFactorial: number): number {
-    // return -1 for error cases
-    if (Number.isInteger(numberToFactorial) === false) {
-        return -1;
-    }
-    if (numberToFactorial < 0) {
-        return -1;
-    }
-    // base case and 0 case
-    if (numberToFactorial == 1 || numberToFactorial == 0) {
-        return 1;
+function mergeSort(array: number[]): number[] {
+    // Base case: array with 0 or 1 element is already sorted
+    if (array.length <= 1) {
+        return array;
     }
 
-    // Multiply the lower number by the current number
-    return calculateFactorial(numberToFactorial - 1) * numberToFactorial;
+    // Split the array into two halves
+    const midIndex = Math.floor(array.length / 2);
+    const leftHalf = mergeSort(array.slice(0, midIndex));
+    const rightHalf = mergeSort(array.slice(midIndex));
+
+    // Merge the two halves
+    const sortedArray: number[] = [];
+    let leftIndex = 0;
+    let rightIndex = 0;
+
+    while (leftIndex < leftHalf.length && rightIndex < rightHalf.length) {
+        if (leftHalf[leftIndex] <= rightHalf[rightIndex]) {
+            sortedArray.push(leftHalf[leftIndex]);
+            leftIndex++;
+        } else {
+            sortedArray.push(rightHalf[rightIndex]);
+            rightIndex++;
+        }
+    }
+
+    // Add any remaining elements
+    return sortedArray.concat(leftHalf.slice(leftIndex), rightHalf.slice(rightIndex));
 }
 
-// the main logic
-const input = prompt("Enter a positive integer: ");
-if (input === null) {
-    console.log("Invalid Input");
-} else {
-    const userInput = parseFloat(input);
+// Main logic
+console.log("Merge Sort Program");
 
-    console.log("");
-    const theProduct = calculateFactorial(userInput);
-    if (theProduct == -1) {
-        console.log("Invalid input");
-    } else {
-        console.log(`${userInput}! = ${theProduct}`);
-    }
-}
+// Constants
+const MAX = 100;
+const ARRAY_SIZE = 20;
+
+// Generate random array
+const randomNumberArray: number[] = Array.from(
+    { length: ARRAY_SIZE },
+    () => Math.floor(Math.random() * (MAX + 1))
+);
+
+console.log("\nUnsorted list of numbers:");
+console.log(randomNumberArray);
+
+// Perform Merge Sort
+const sortedArray = mergeSort(randomNumberArray);
+
+console.log("\nSorted list of numbers:");
+console.log(sortedArray);
 
 console.log("\nDone.");
