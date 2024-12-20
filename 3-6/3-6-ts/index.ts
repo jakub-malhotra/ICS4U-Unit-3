@@ -37,7 +37,14 @@ function mergeSort(array: number[]): number[] {
     }
 
     // Add any remaining elements
-    return sortedArray.concat(leftHalf.slice(leftIndex), rightHalf.slice(rightIndex));
+    for (let counter = leftIndex; counter < leftHalf.length; counter++) {
+        sortedArray.push(leftHalf[counter]);
+    }
+    for (let counter = rightIndex; counter < rightHalf.length; counter++) {
+        sortedArray.push(rightHalf[counter]);
+    }
+    return sortedArray;
+
 }
 
 // Main logic
